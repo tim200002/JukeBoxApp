@@ -48,7 +48,9 @@ class WelcomeScreen extends StatelessWidget {
                         "Create a Party",
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        BlocProvider.of<NavigationBloc>(context).add((CreateParty()));
+                      },
                     ),
                   ),
 
@@ -85,7 +87,9 @@ class WelcomeScreen extends StatelessWidget {
                         "Join a Party",
                         style: TextStyle(color: Colors.black, fontSize: 20),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                         BlocProvider.of<NavigationBloc>(context).add(NavigateToJoinPartyScreen());
+                      },
                     ),
                   ),
                   SizedBox(height: 20,)

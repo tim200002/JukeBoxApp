@@ -25,16 +25,20 @@ class ShowMyPartiesScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                 
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "My Parties: ",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    child: Row(
+                      children: <Widget>[
+
+                        IconButton(icon: Icon(Icons.arrow_back),color: Colors.black,onPressed: (){BlocProvider.of<NavigationBloc>(context).add(NavigateToWelcomeScreen());},),
+                        Text(
+                          "My Parties: ",
+                          style:
+                              TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
                   ),
                   Expanded(
                     child: ListView.builder(

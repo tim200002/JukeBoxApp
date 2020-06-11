@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jukebox/Bloc/BlocLoginWithSpotify.dart';
-import 'package:jukebox/Bloc/BlocNowPlayingScreen.dart';
 import 'package:jukebox/Bloc/BlocShowMyPartiesScreen.dart';
 import 'package:jukebox/Bloc/BlocWelcomeScreen.dart';
 import 'package:jukebox/Bloc/navigationBloc.dart';
-import 'package:jukebox/Screen/NowPlayingScreen.dart';
+import 'package:jukebox/Screen/CreatePartyScreen.dart';
+import 'package:jukebox/Screen/JoinPartyScreen.dart';
 import 'package:jukebox/Screen/NowPlayingScreen2.dart';
 import 'package:jukebox/Screen/WelcomeScreen.dart';
+import 'package:jukebox/ViewModel/CreatePartyViewModel.dart';
+import 'package:jukebox/ViewModel/JoinPartyViewModel.dart';
 import 'package:jukebox/ViewModel/LoginWithSpotifyViewModel.dart';
 import 'package:provider/provider.dart';
 
@@ -71,6 +72,12 @@ class MyApp extends StatelessWidget {
           }
           else if (state is StateShowMyPartiesScreen){
             return BlocProvider(create: (BuildContext context)=>BlocShowMyPartiesScreen(), child: ShowMyPartiesScreen(),);
+          }
+          else if (state is StateShowCreatePartyScreen){
+            return ChangeNotifierProvider(create: (context)=>CreatePartyViewModel(),child: CreatePartyScreen(),);
+          }
+           else if (state is StateJoinPartyScreen){
+            return ChangeNotifierProvider(create: (context)=>JoinPartyViewModel(),child: JoinPartyScreen(),);
           }
 
           }

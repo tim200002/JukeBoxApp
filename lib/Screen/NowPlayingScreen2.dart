@@ -2,6 +2,8 @@ import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jukebox/Bloc/navigationBloc.dart';
 import 'package:jukebox/Screen/SearchScreen.dart';
 import 'package:jukebox/ViewModel/NowPlayingScreenViewModell.dart';
 import 'package:jukebox/Widgets/NowPlayingTile.dart';
@@ -28,17 +30,17 @@ class _NowPlayingScreen2State extends State<NowPlayingScreen2> {
     final vm = Provider.of<NowPlayingigViewModel>(context);
     //vm.update();
     return Scaffold(
+      //appBar: AppBar(leading: ,),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(
-                height: 20,
-              ),
+               IconButton(icon: Icon(Icons.arrow_back),color: Colors.black,onPressed: (){BlocProvider.of<NavigationBloc>(context).add(NavigateToWelcomeScreen());},),
+    
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(left:8.0, bottom: 8),
                 child: Text(
                   vm.partyName,
                   style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
@@ -56,8 +58,8 @@ class _NowPlayingScreen2State extends State<NowPlayingScreen2> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     if (vm.nowPlaying == null)
-                      Image.network(
-                        'https://picsum.photos/250?image=9',
+                      Image.asset(
+                        'lib/Assets/musicPlaceholder.jpg',
                         width: 200,
                       )
                     else
