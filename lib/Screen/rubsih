@@ -1,0 +1,96 @@
+/*
+
+    return BlocBuilder<BlocLoginWithSpotifyScreen,
+        LoginWithSpotifyScreenStates>(
+      builder: (context, state) {
+        if (state is InWebView) {
+          final flutterWebviewPlugin = new FlutterWebviewPlugin();
+          flutterWebviewPlugin.onUrlChanged.listen((String url) {
+            log("Opened url: " + url);
+            if (url.contains("http://192.168.0.250:8080/callback")) {
+              flutterWebviewPlugin.close();
+              BlocProvider.of<BlocLoginWithSpotifyScreen>(context)
+                  .add(Validate());
+            }
+          });
+
+          /*return Scaffold(body: SafeArea(child: 
+          WebView(
+            javascriptMode: JavascriptMode.unrestricted,
+            initialUrl: state.url,
+            onWebViewCreated: (WebViewController webViewController){
+              _controller = webViewController;;
+            },
+            onPageStarted: (String url){
+              log("Url in webView Sartet Loading: "+url);
+              
+            },
+            
+          )
+          ,),);*/
+
+          return WebviewScaffold(
+            url: state.url,
+            appBar: AppBar(
+              backgroundColor: Colors.white,
+              actions: <Widget>[
+                FlatButton(
+                    onPressed: () {
+                      flutterWebviewPlugin.close();
+                      BlocProvider.of<BlocLoginWithSpotifyScreen>(context)
+                          .add(abort()); //!Better Cancel Event
+                    },
+                    child: Text("Cancel"))
+              ],
+            ),
+          );
+        } else if (state is NotLoggedIn) {
+          return Scaffold(
+            body: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: MaterialButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  minWidth: double.infinity,
+                  height: 50,
+                  color: Colors.lightGreenAccent[400],
+                  child: Text(
+                    "Connect with Spotify",
+                    style: TextStyle(color: Colors.black, fontSize: 20),
+                  ),
+                  onPressed: () {
+                    BlocProvider.of<BlocLoginWithSpotifyScreen>(context)
+                        .add(OpenWebView());
+                  },
+                ),
+              ),
+            ),
+          );
+        }
+        else if (state is LoggedIn){
+          return Scaffold(
+            body: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: MaterialButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  minWidth: double.infinity,
+                  height: 50,
+                  color: Colors.grey,
+                  child: Text(
+                    "Continue",
+                    style: TextStyle(color: Colors.black, fontSize: 20),
+                  ),
+                  onPressed: () {
+   /*                 
+                  },
+                ),
+              ),
+            ),
+          );
+        }
+      },
+    );
+  }
