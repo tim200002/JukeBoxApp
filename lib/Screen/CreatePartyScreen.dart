@@ -14,16 +14,31 @@ class CreatePartyScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              "Create Party",
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            Row(
+              children: <Widget>[
+                 IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  color: Colors.black,
+                  onPressed: () {
+                    BlocProvider.of<NavigationBloc>(context)
+                        .add(NavigateToWelcomeScreen());
+                  },
+                ),
+                Text(
+                  "Create Party",
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                ),
+              ],
             ),
-            TextField(
-              controller: textController,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5)),
-                  hintText: "Create Party"),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: textController,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                    hintText: "Create Party"),
+              ),
             ),
              if (vm.validationFailed) Text("Creating the Party failed try again or go back", style: TextStyle(color: Colors.red),) ,
             Spacer(),

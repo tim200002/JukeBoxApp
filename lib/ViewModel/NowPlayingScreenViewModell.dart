@@ -85,7 +85,7 @@ class NowPlayingigViewModel extends ChangeNotifier {
         "${NetworkConfig().apiAdress}/party/toggle?partyId=$partyId&_id=$userId");
     if (response.statusCode != 200) {
       log("Calling Api failed");
-      return;
+      throw("Error Toggling");
     }
     log("toggled");
   }

@@ -30,13 +30,16 @@ class JoinPartyScreen extends StatelessWidget {
                 ),
               ],
             ),
-             TextField(
-              controller: textController,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5)),
-                  hintText: "Join a Party"),
+             Padding(
+               padding: const EdgeInsets.all(8.0),
+               child: TextField(
+                controller: textController,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                    hintText: "Join a Party"),
             ),
+             ),
             if (vm.validationFailed) Text("Creating the Party failed try again or go back", style: TextStyle(color: Colors.red),) ,
             Spacer(),
             //Button

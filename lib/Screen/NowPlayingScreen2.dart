@@ -81,7 +81,7 @@ class _NowPlayingScreen2State extends State<NowPlayingScreen2> {
                       "lib/Assets/pause_play.png",
                       height: 50,
                     ),
-                    onPressed: (){vm.toggle();},
+                    onPressed: (){vm.toggle().catchError((err){log("Error");AlertDialog(title: Text("We coulnt Toggle make sure a Valid Session is runing on a Laptop"),);});},
                     ),
                     FlatButton(
                         child: Image.asset(
