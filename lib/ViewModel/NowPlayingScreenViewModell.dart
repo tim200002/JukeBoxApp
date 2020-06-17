@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:jukebox/Configuration/networkConfig.dart';
 import 'package:jukebox/models/song.dart';
 import 'package:http/http.dart' as http;
@@ -80,23 +81,84 @@ class NowPlayingigViewModel extends ChangeNotifier {
     update();
   }
 
-  Future<void> toggle() async {
+  Future<void> toggle(context) async {
+
     var response = await http.get(
         "${NetworkConfig().apiAdress}/party/toggle?partyId=$partyId&_id=$userId");
     if (response.statusCode != 200) {
       log("Calling Api failed");
-      throw("Error Toggling");
+      return showNotConnectedDialog(context);
+    }else{
+          log("toggled");
     }
-    log("toggled");
   }
 
-  Future<void> skip() async {
+  Future<void> skip(context) async {
     var response = await http.get(
         "${NetworkConfig().apiAdress}/party/skip?partyId=$partyId&_id=$userId");
     if (response.statusCode != 200) {
       log("Calling Api failed");
-      return;
+            log(response.body);
+      showSkipDialog(context);
     }
     log("skipped");
   }
+
+  Future<void> showNotConnectedDialog(BuildContext context) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Connect Party'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('It seems like there is no Spofity Insatce running on a Computer'),
+              Text('Connect to a Computer and try again'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Ok'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+
+  Future<void> showSkipDialog(BuildContext context) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('We cannot Skip'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('Skipping failed because:'),
+              Text('a) you haven\'t connected a Computer'),
+              Text("b) playlist ist to Short, there are no Songs to skip to")
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Ok'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
 }

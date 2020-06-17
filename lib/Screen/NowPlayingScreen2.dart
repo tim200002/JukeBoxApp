@@ -81,14 +81,14 @@ class _NowPlayingScreen2State extends State<NowPlayingScreen2> {
                       "lib/Assets/pause_play.png",
                       height: 50,
                     ),
-                    onPressed: (){vm.toggle().catchError((err){log("Error");AlertDialog(title: Text("We coulnt Toggle make sure a Valid Session is runing on a Laptop"),);});},
+                    onPressed: (){vm.toggle(context);}
                     ),
                     FlatButton(
                         child: Image.asset(
                       "lib/Assets/skip.png",
                       height: 50,
                     ),
-                    onPressed: (){vm.skip();},
+                    onPressed: (){vm.skip(context);},
                     )
                   ]
                 ],
@@ -143,3 +143,4 @@ class _NowPlayingScreen2State extends State<NowPlayingScreen2> {
     );
   }
 }
+
