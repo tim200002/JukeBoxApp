@@ -12,11 +12,12 @@ import 'package:provider/provider.dart';
 
 class SearchScreen extends StatelessWidget {
   final String partyId;
-  SearchScreen({@required this.partyId});
+  final String userId;
+  SearchScreen({@required this.partyId, @required this.userId});
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => SearchViewModel(partyId: partyId), child: SearchScreenReal());
+        create: (context) => SearchViewModel(partyId: partyId, userId: userId), child: SearchScreenReal());
   }
 }
 

@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 class SearchTile extends StatefulWidget {
   final SearchViewModel vm;
   final Song song;
+  bool canVote = true;
   SearchTile({@required this.vm, @required this.song});
   @override
   _SearchTileState createState() => _SearchTileState();
@@ -44,17 +45,25 @@ class _SearchTileState extends State<SearchTile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                   ),
                 ),
-                Image.asset(
-                  'lib/Assets/heart.png',
-                  height: 35,
+                Opacity(
+                  opacity: widget.canVote ? 1 : 0.3,
+                  child: Image.asset(
+                    'lib/Assets/heart.png',
+                    height: 35,
+                  ),
                 )
               ],
             ),
           ),
         ),
         onTap: () {
-          log("Search Tile");
-          widget.vm.addSong(widget.song);
+          if (widget.canVote) {
+            widget.vm.addSong(widget.song);
+            widget.canVote = false;
+            setState(() {
+              
+            });
+          }
         });
   }
 }

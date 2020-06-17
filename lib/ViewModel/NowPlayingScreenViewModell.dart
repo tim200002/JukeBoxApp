@@ -54,6 +54,7 @@ class NowPlayingigViewModel extends ChangeNotifier {
     playlist = (json.decode(response.body) as List)
         .map((i) => Song.fromJson(i))
         .toList();
+    log(playlist[0].voters.toString());
     if (playlist.length > 0) {
       nowPlaying = playlist[0];
       playlist.removeAt(0);
@@ -67,7 +68,8 @@ class NowPlayingigViewModel extends ChangeNotifier {
       'songId': song.songId,
       'artist': song.artist,
       'albumArt': song.albumArt,
-      'title': song.title
+      'title': song.title,
+      "userId": userId
     };
 
     var body = json.encode(data);
@@ -75,6 +77,7 @@ class NowPlayingigViewModel extends ChangeNotifier {
         headers: {"Content-Type": "application/json"}, body: body);
     if (response.statusCode != 200) {
       log("Calling Api failed");
+      log(response.body);
       return;
     }
     log("voted");

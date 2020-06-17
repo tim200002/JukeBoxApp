@@ -9,7 +9,8 @@ import 'package:http/http.dart' as http;
 class SearchViewModel extends ChangeNotifier{
   List<Song> playlist =[];
   final String partyId;
-  SearchViewModel({@required this.partyId});
+  final String userId;
+  SearchViewModel({@required this.partyId, @required this.userId});
  
   //Make all the API Calls
   Future<void> search(String query)async{
@@ -33,9 +34,10 @@ class SearchViewModel extends ChangeNotifier{
   }
 
   Future<void> addSong(Song song)async{
-
+    log(userId);
     Map data = {
       'id': partyId,
+      'userId': userId,
       'songId': song.songId,
       'artist': song.artist,
       'albumArt': song.albumArt,

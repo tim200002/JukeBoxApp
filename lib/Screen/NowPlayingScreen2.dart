@@ -104,7 +104,9 @@ class _NowPlayingScreen2State extends State<NowPlayingScreen2> {
                         ),
                     itemCount: vm.playlist.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return NowPlayingTile(vm: vm, song: vm.playlist[index]);
+                      if (vm.playlist[index].voters.contains(vm.userId))  return NowPlayingTile(vm: vm, song: vm.playlist[index], canVote: false,);
+                      else return NowPlayingTile(vm: vm, song: vm.playlist[index], canVote: true,);
+                      
                     }),
               ),
               Divider(
@@ -125,7 +127,7 @@ class _NowPlayingScreen2State extends State<NowPlayingScreen2> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  SearchScreen(partyId: vm.partyId)),
+                                  SearchScreen(partyId: vm.partyId, userId: vm.userId,)),
                         ).then((value) => vm.update());
                       },
                       child: Image.asset(

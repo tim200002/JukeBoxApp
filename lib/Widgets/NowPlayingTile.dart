@@ -7,8 +7,9 @@ import 'package:jukebox/models/song.dart';
 class NowPlayingTile extends StatefulWidget {
   NowPlayingigViewModel vm;
   final Song song;
+  final bool canVote;
 
-  NowPlayingTile({@required this.vm, @required this.song});
+  NowPlayingTile({@required this.vm, @required this.song, @required this.canVote});
   @override
   _NowPlayingTileState createState() => _NowPlayingTileState();
 }
@@ -39,17 +40,22 @@ class _NowPlayingTileState extends State<NowPlayingTile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                   ),
                 ),
-                
-                Image.asset(
+                Opacity(
+                  opacity: widget.canVote?1.0:0.3,
+                  child: Image.asset(
                     'lib/Assets/heart.png',
                     height: 35,
-                  )
+                  ),
+                )
+                
               ],
             ),
           ),
         ),
         onTap: () {
-          widget.vm.vote(widget.song);
+          if(widget.canVote){ widget.vm.vote(widget.song);}
+          else log("You already voted");
+         
         });
   }
 }
