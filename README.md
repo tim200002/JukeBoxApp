@@ -1,4 +1,4 @@
 # JukeBoxApp
 
-Flutter App which works like a Jukebox at a Party. User can Vote for Songs and the most wotes Song will play next
-
+This Repository is part of my Jukebox Project.
+In the App users can vote for their favourite Songs. At the End of each Songs the most voted Song gets played Next.
