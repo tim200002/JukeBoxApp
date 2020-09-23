@@ -5,7 +5,7 @@ In the App users can vote for their favourite Songs. At the End of each Songs th
 
 Here are a few pictures from the App
 
-The Ladning Page
+The Landing Page
 ![Screenshot_1600850560](https://user-images.githubusercontent.com/48860268/93991196-4ac69b00-fd8c-11ea-9deb-0201834d44e7.png)
 The Home Page of each Party
 ![Screenshot_1600851439](https://user-images.githubusercontent.com/48860268/93991471-a4c76080-fd8c-11ea-985a-49b17a641c6d.png)
